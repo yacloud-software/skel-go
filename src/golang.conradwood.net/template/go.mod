@@ -4,7 +4,7 @@ go 1.18
 
 require (
 	golang.conradwood.net/apis/common v1.1.1861
-	golang.conradwood.net/go-easyops v0.1.13688
+	golang.conradwood.net/go-easyops v0.1.17944
 	google.golang.org/grpc v1.42.0
 )
 
