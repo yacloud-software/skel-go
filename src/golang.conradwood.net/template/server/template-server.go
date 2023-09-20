@@ -25,13 +25,14 @@ func main() {
 	fmt.Printf("Starting EchoServiceServer...\n")
 
 	sd := server.NewServerDef()
-	sd.Port = *port
-	sd.Register = server.Register(
+	sd.SetPort(*port)
+	sd.SetRegister(server.Register(
 		func(server *grpc.Server) error {
 			e := new(echoServer)
 			pb.RegisterEchoServiceServer(server, e)
 			return nil
 		},
+	),
 	)
 	err = server.ServerStartup(sd)
 	utils.Bail("Unable to start server", err)
