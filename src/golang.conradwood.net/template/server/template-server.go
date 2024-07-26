@@ -23,7 +23,7 @@ func main() {
 	var err error
 	flag.Parse()
 	fmt.Printf("Starting EchoServiceServer...\n")
-	server.SetHealth(server.READY)
+	server.SetHealth(common.Health_READY)
 
 	sd := server.NewServerDef()
 	sd.SetPort(*port)
