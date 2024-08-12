@@ -23,9 +23,10 @@ func main() {
 	var err error
 	flag.Parse()
 	fmt.Printf("Starting EchoServiceServer...\n")
-	server.SetHealth(common.Health_READY)
+	server.SetHealth(common.Health_STARTING)
 
 	sd := server.NewServerDef()
+	sd.SetOnStartupCallback(server_started)
 	sd.SetPort(*port)
 	sd.SetRegister(server.Register(
 		func(server *grpc.Server) error {
@@ -38,6 +39,12 @@ func main() {
 	err = server.ServerStartup(sd)
 	utils.Bail("Unable to start server", err)
 	os.Exit(0)
+}
+
+// called after server was started and is listening
+func server_started() {
+	server.SetHealth(common.Health_STARTING)
+	server.SetHealth(common.Health_READY)
 }
 
 /************************************
